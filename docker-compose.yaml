@@ -1,0 +1,22 @@
+version: '3.8'
+services:
+  app:
+    image: bankbuddyspring/bankbuddy:1.0.0
+    platform: linux/amd64
+    ports:
+      - 8080:8080
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://24.199.105.210:5401/user
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: posterdata
+
+  frontend:
+    build:
+      context: ./react-front-end
+      dockerfile: Dockerfile
+    volumes:
+      - ./react-front-end:/app
+      - /app/node_modules
+    ports:
+      - 4200:4200
+    restart: unless-stopped

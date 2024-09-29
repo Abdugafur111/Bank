@@ -1,0 +1,15 @@
+#!/bin/bash
+
+# Change directory to your project directory (BankBuddy in this case)
+cd BankBuddy
+./mvnw clean install
+sleep 15
+
+# Build the Docker image
+docker build --platform=linux/amd64 -t bankbuddyspring/bankbuddy:1.0.0 .
+
+cd ..
+
+# Run Docker Compose to start your services
+docker-compose up
+
